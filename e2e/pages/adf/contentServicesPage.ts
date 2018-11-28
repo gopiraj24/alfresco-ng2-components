@@ -36,6 +36,7 @@ export class ContentServicesPage {
     currentFolder = element(by.css('div[class*="adf-breadcrumb-item adf-active"] div'));
     createFolderButton = element(by.css('button[data-automation-id="create-new-folder"]'));
     activeBreadcrumb = element(by.css('div[class*="active"]'));
+    tooltip = by.css('div[class*="--text adf-full-width"] span');
     uploadFileButton = element(by.css('input[data-automation-id="upload-single-file"]'));
     uploadMultipleFileButton = element(by.css('input[data-automation-id="upload-multiple-files"]'));
     uploadFolderButton = element(by.css('input[data-automation-id="uploadFolder"]'));
@@ -251,6 +252,10 @@ export class ContentServicesPage {
             deferred.fulfill(result);
         });
         return deferred.promise;
+    }
+
+    getTooltip(content) {
+        return this.contentList.getRowByRowName(content).element(this.tooltip).getAttribute('title');
     }
 
     getBreadcrumbTooltip(nodeName: string) {
