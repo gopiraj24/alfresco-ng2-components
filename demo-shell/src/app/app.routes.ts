@@ -47,6 +47,7 @@ import { TaskDetailsCloudDemoComponent } from './components/app-layout/cloud/tas
 import { AppsCloudDemoComponent } from './components/app-layout/cloud/apps-cloud-demo.component';
 import { TasksCloudDemoComponent } from './components/app-layout/cloud/tasks-cloud-demo.component';
 import { StartTaskCloudDemoComponent } from './components/app-layout/cloud/start-task-cloud-demo.component';
+import { DocumentListComponent } from './components/document-list/document-list.component';
 
 export const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -336,6 +337,10 @@ export const appRoutes: Routes = [
                 path: 'process-list',
                 canActivate: [AuthGuardBpm],
                 loadChildren: 'app/components/process-list-demo/process-list.module#AppProcessListModule'
+            },
+            {
+                path: 'document-list',
+                component: DocumentListComponent
             },
             {
                 path: 'error/:id',

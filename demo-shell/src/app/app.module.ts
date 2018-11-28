@@ -74,6 +74,7 @@ import { StartTaskCloudDemoComponent } from './components/app-layout/cloud/start
 import { CloudBreadcrumbsComponent } from './components/app-layout/cloud/cloud-breadcrumb-component';
 import { TasksCloudDemoComponent } from './components/app-layout/cloud/tasks-cloud-demo.component';
 import { CloudFiltersDemoComponent } from './components/app-layout/cloud/cloud-filters-demo.component';
+import { DocumentListComponent } from './components/document-list/document-list.component';
 
 @NgModule({
     imports: [
@@ -124,6 +125,7 @@ import { CloudFiltersDemoComponent } from './components/app-layout/cloud/cloud-f
         FormLoadingComponent,
         ReportIssueComponent,
         TreeViewSampleComponent,
+        DocumentListComponent,
         CloudLayoutComponent,
         AppsCloudDemoComponent,
         TasksCloudDemoComponent,
