@@ -31,6 +31,7 @@ import { DocumentListComponent } from './components/document-list.component';
 
 import { EmptyFolderContentDirective } from './components/empty-folder/empty-folder-content.directive';
 import { NoPermissionContentDirective } from './components/no-permission/no-permission-content.directive';
+import { ContentLoadingDirective } from './components/content-loading/content-loading.directive';
 
 @NgModule({
     imports: [
@@ -47,7 +48,8 @@ import { NoPermissionContentDirective } from './components/no-permission/no-perm
         ContentActionComponent,
         ContentActionListComponent,
         EmptyFolderContentDirective,
-        NoPermissionContentDirective
+        NoPermissionContentDirective,
+        ContentLoadingDirective
     ],
     exports: [
         DocumentListComponent,
@@ -56,7 +58,8 @@ import { NoPermissionContentDirective } from './components/no-permission/no-perm
         ContentActionComponent,
         ContentActionListComponent,
         EmptyFolderContentDirective,
-        NoPermissionContentDirective
+        NoPermissionContentDirective,
+        ContentLoadingDirective
     ]
 })
 export class DocumentListModule {}
