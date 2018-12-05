@@ -51,6 +51,11 @@ export class NavigationBarPage {
         this.dataTableButton.click();
     }
 
+    navigateToDatatable() {
+        Util.waitUntilElementIsVisible(this.dataTableButton);
+        this.dataTableButton.click();
+    }
+
     clickContentServicesButton() {
         Util.waitUntilElementIsVisible(this.contentServicesButton);
         this.contentServicesButton.click();

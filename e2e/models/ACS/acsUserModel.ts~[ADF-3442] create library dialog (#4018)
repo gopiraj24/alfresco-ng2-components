@@ -15,34 +15,43 @@
  * limitations under the License.
  */
 
-var TaskAssigneeModel = function (details) {
+import { Util } from '../../util/util';
 
-    this.id;
-    this.firstName;
-    this.lastName;
-    this.email;
+export class AcsUserModel {
 
-    this.getFirstName = function () {
+    firstName = Util.generateRandomString();
+    lastName = Util.generateRandomString();
+    password = Util.generateRandomString();
+    email = Util.generateRandomString();
+    id = Util.generateRandomString();
+    jobTitle = 'N/A';
+
+    constructor(details?: any) {
+        Object.assign(this, details);
+    }
+
+    getFirstName = function () {
         return this.firstName;
     };
 
-    this.getId = function () {
-        return this.id;
-    };
-
-    this.getLastName = function () {
+    getLastName = function () {
         return this.lastName;
     };
 
-    this.getEmail = function () {
+    getPassword = function () {
+        return this.password;
+    };
+
+    getEmail = function () {
         return this.email;
     };
 
-    this.getEntireName = function() {
-        return this.firstName + " " + this.getLastName();
+    getId = function () {
+        return this.id;
     };
 
-    Object.assign(this, details);
+    getJobTitle = function () {
+        return this.jobTitle;
+    };
 
-};
-module.exports = TaskAssigneeModel;
+}

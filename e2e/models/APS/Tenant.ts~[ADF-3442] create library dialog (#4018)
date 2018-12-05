@@ -15,17 +15,24 @@
  * limitations under the License.
  */
 
+import { Util } from '../../util/util';
+
 /**
- * Process Instance representation JSON Object
+ * Create tenant JSON Object
  *
  * @param details - JSON object used to overwrite the default values
  * @constructor
  */
+export class Tenant {
 
-var ProcessInstance = function (details) {
-    this.processDefinitionId = 1234;
-    this.name = "Process started from REST API";
+    active = true;
+    configuration = 'DefaultConfig';
+    domain = 'DefaultDomain';
+    maxUsers = 10;
+    name = Util.generateRandomString();
 
-    Object.assign(this, details);
-};
-module.exports = ProcessInstance;
+    constructor(details?: any) {
+        Object.assign(this, details);
+    }
+
+}

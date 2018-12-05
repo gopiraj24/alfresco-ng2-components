@@ -15,17 +15,39 @@
  * limitations under the License.
  */
 
-/**
- * Process Instance representation JSON Object
- *
- * @param details - JSON object used to overwrite the default values
- * @constructor
- */
+import { Util } from '../../util/util';
 
-var ProcessInstance = function (details) {
-    this.processDefinitionId = 1234;
-    this.name = "Process started from REST API";
+export class FolderModel {
 
-    Object.assign(this, details);
-};
-module.exports = ProcessInstance;
+    id = Util.generateRandomString();
+    name = Util.generateRandomString();
+    shortName = this.name;
+    tooltip = this.name;
+    location = '';
+    description = '';
+
+    constructor(details?: any) {
+        Object.assign(this, details);
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    getShortName() {
+        return this.shortName;
+    }
+
+    getTooltip() {
+        return this.tooltip;
+    }
+
+    getId() {
+        return this.id;
+    }
+
+    getLocation() {
+        return this.location;
+    }
+
+}
