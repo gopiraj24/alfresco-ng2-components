@@ -26,6 +26,8 @@ export class TasksCloudDemoPage {
     myTasks = element(by.css('span[data-automation-id="my-tasks-filter"]'));
     completedTasks = element(by.css('span[data-automation-id="completed-tasks-filter"]'));
     activeFilter = element(by.css("mat-list-item[class*='active'] span"));
+    createButton = element(by.css('button[data-automation-id="create-button"'));
+    newTaskButton = element(by.css('button[data-automation-id="btn-start-task"]'));
 
     taskFiltersCloudComponent(filter) {
         return new TaskFiltersCloudComponent(filter);
@@ -50,6 +52,29 @@ export class TasksCloudDemoPage {
     checkActiveFilterActive () {
         Util.waitUntilElementIsVisible(this.activeFilter);
         return this.activeFilter.getText();
+    }
+
+    createNewTask() {
+        this.createButtonIsDisplayed();
+        this.clickOnCreateButton();
+        this.newTaskButtonIsDisplayed();
+        this.newTaskButton.click();
+    }
+
+    createButtonIsDisplayed() {
+        Util.waitUntilElementIsVisible(this.createButton);
+        return this;
+    }
+
+    newTaskButtonIsDisplayed() {
+        Util.waitUntilElementIsVisible(this.newTaskButton);
+        return this;
+    }
+
+    clickOnCreateButton() {
+        Util.waitUntilElementIsClickable(this.createButton);
+        this.createButton.click();
+        return this;
     }
 
 }
