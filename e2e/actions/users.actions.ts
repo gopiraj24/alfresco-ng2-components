@@ -15,13 +15,13 @@
  * limitations under the License.
  */
 
-import { Tenant } from '../models/APS/Tenant';
-import { User } from '../models/APS/User';
 import TestConfig = require('../test.config');
 import path = require('path');
 import fs = require('fs');
 import remote = require('selenium-webdriver/remote');
 import { browser } from 'protractor';
+import { Tenant } from '../models/APS/Tenant';
+import { User } from '../models/APS/User';
 
 export class UsersActions {
 
@@ -39,7 +39,6 @@ export class UsersActions {
         let user = new User({ tenantId: tenantId });
 
         await alfrescoJsApi.activiti.adminUsersApi.createNewUser(user);
-
         return user;
     }
 

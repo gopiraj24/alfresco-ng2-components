@@ -44,12 +44,6 @@ export class NavigationBarPage {
     formButton = element(by.css('a[data-automation-id="Form"]'));
     treeViewButton = element(by.css('a[data-automation-id="Tree View"]'));
     processListButton = element(by.css('a[data-automation-id="Process List"]'));
-	treeViewButton = element(by.css('a[data-automation-id="Tree View"]'));
-
-    navigateToDatatable() {
-        Util.waitUntilElementIsVisible(this.dataTableButton);
-        this.dataTableButton.click();
-    }
 
     navigateToDatatable() {
         Util.waitUntilElementIsVisible(this.dataTableButton);
@@ -202,17 +196,12 @@ export class NavigationBarPage {
     }
 
     clickProcessListButton = function () {
-        Util.waitUntilElementIsVisible(this.processListButton);
+        Util.waitUntilElementIsClickable(this.processListButton);
         return this.processListButton.click();
     };
 
-    clickTreeViewButton() {
-        Util.waitUntilElementIsVisible(this.treeViewButton);
-        this.treeViewButton.click();
-    }
-
-    clickProcessListButton = function () {
+    checkProcessListButtonIsDisplayed = function () {
         Util.waitUntilElementIsVisible(this.processListButton);
-        return this.processListButton.click();
+        return this;
     };
 }
