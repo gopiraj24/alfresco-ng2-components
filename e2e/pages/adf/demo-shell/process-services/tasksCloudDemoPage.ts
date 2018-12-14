@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 
-import { Util } from '../../../util/util';
+import { Util } from '../../../../util/util';
 
-import { TaskFiltersCloudComponent } from '../process_cloud/taskFiltersCloudComponent';
-import { TaskListCloudComponent } from '../process_cloud/taskListCloudComponent';
+import { TaskFiltersCloudComponent } from '../../process_cloud/taskFiltersCloudComponent';
+import { TaskListCloudComponent } from '../../process_cloud/taskListCloudComponent';
 import { element, by } from 'protractor';
 
 export class TasksCloudDemoPage {

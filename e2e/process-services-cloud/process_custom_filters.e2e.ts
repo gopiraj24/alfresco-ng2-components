@@ -20,8 +20,8 @@ import TestConfig = require('../test.config');
 import { LoginSSOPage } from '../pages/adf/loginSSOPage';
 import { SettingsPage } from '../pages/adf/settingsPage';
 import { NavigationBarPage } from '../pages/adf/navigationBarPage';
-import { ProcessCloudDemoPage } from '../pages/adf/demo-shell/processCloudDemoPage';
-import { TasksCloudDemoPage } from '../pages/adf/demo-shell/tasksCloudDemoPage';
+import { ProcessCloudDemoPage } from '../pages/adf/demo-shell/process-services/processCloudDemoPage';
+import { TasksCloudDemoPage } from '../pages/adf/demo-shell/process-services/tasksCloudDemoPage';
 import { AppListCloudComponent } from '../pages/adf/process_cloud/appListCloudComponent';
 
 import { ProcessDefinitions } from '../actions/APS-cloud/process-definitions';
@@ -46,7 +46,7 @@ describe('Process list cloud', () => {
 
         const path = '/auth/realms/springboot';
         let silentLogin;
-        let runningProcess, completedProcess;
+        let  completedProcess;
         const simpleApp = 'candidateuserapp';
         const user = TestConfig.adf.adminEmail, password = TestConfig.adf.adminPassword;
 
@@ -59,7 +59,7 @@ describe('Process list cloud', () => {
             await processDefinitionService.init(user, password);
             let processDefinition = await processDefinitionService.getProcessDefinitions(simpleApp);
             await processInstancesService.init(user, password);
-            runningProcess = await processInstancesService.createProcessInstance(processDefinition.list.entries[0].entry.key, simpleApp);
+            await processInstancesService.createProcessInstance(processDefinition.list.entries[0].entry.key, simpleApp);
 
             completedProcess = await processInstancesService.createProcessInstance(processDefinition.list.entries[0].entry.key, simpleApp);
             await queryService.init(user, password);

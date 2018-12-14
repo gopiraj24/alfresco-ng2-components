@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-import { Util } from '../../../util/util';
+import { Util } from '../../../../util/util';
 
-import { ProcessFiltersCloudComponent } from '../process_cloud/processFiltersCloudComponent';
-import { ProcessListCloudComponent } from '../process_cloud/processListCloudComponent';
-import { EditProcessFilterCloudComponent } from '../process_cloud/editProcessFilterCloudComponent';
+import { ProcessFiltersCloudComponent } from '../../process_cloud/processFiltersCloudComponent';
+import { ProcessListCloudComponent } from '../../process_cloud/processListCloudComponent';
+import { EditProcessFilterCloudComponent } from '../../process_cloud/editProcessFilterCloudComponent';
 import { element, by } from 'protractor';
 
 export class ProcessCloudDemoPage {

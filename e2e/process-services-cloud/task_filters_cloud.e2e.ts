@@ -20,7 +20,7 @@ import TestConfig = require('../test.config');
 import { LoginSSOPage } from '../pages/adf/loginSSOPage';
 import { SettingsPage } from '../pages/adf/settingsPage';
 import { NavigationBarPage } from '../pages/adf/navigationBarPage';
-import { TasksCloudDemoPage } from '../pages/adf/demo-shell/tasksCloudDemoPage';
+import { TasksCloudDemoPage } from '../pages/adf/demo-shell/process-services/tasksCloudDemoPage';
 import { AppListCloudComponent } from '../pages/adf/process_cloud/appListCloudComponent';
 import { Tasks } from '../actions/APS-cloud/tasks';
 
