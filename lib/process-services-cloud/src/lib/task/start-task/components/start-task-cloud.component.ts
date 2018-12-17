@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation, OnDestroy, ViewChild, AfterContentInit, ElementRef } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MOMENT_DATE_FORMATS, MomentDateAdapter } from '@alfresco/adf-core';
 import moment from 'moment-es6';
@@ -40,11 +40,13 @@ import {
     encapsulation: ViewEncapsulation.None
 })
 
-export class StartTaskCloudComponent implements OnInit, OnDestroy {
+export class StartTaskCloudComponent implements OnInit, AfterContentInit, OnDestroy {
 
     static MAX_NAME_LENGTH = 255;
 
     public DATE_FORMAT: string = 'DD/MM/YYYY';
+
+    @ViewChild('taskNameInput') taskNameInput: ElementRef;
 
     /** (required) Name of the app. */
     @Input()
@@ -103,6 +105,10 @@ export class StartTaskCloudComponent implements OnInit, OnDestroy {
         });
         this.loadCurrentUser();
         this.buildForm();
+    }
+
+    ngAfterContentInit() {
+        this.taskNameInput.nativeElement.focus();
     }
 
     ngOnDestroy() {
