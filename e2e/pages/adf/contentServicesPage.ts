@@ -19,6 +19,7 @@ import TestConfig = require('../../test.config');
 import { Util } from '../../util/util';
 import { ContentListPage } from './dialog/contentListPage';
 import { CreateFolderDialog } from './dialog/createFolderDialog';
+import { CreateLibraryDialog } from './dialog/createLibraryDialog';
 import { NavigationBarPage } from './navigationBarPage';
 import { by, element, protractor, $$, browser } from 'protractor';
 
@@ -28,11 +29,13 @@ export class ContentServicesPage {
 
     contentList = new ContentListPage();
     createFolderDialog = new CreateFolderDialog();
+    createLibraryDialog = new CreateLibraryDialog();
     uploadBorder = element(by.id('document-list-container'));
     tableBody = element.all(by.css('adf-document-list div[class="adf-datatable-body"]')).first();
     contentServices = element(by.css('a[data-automation-id="Content Services"]'));
     currentFolder = element(by.css('div[class*="adf-breadcrumb-item adf-active"] div'));
     createFolderButton = element(by.css('button[data-automation-id="create-new-folder"]'));
+    createLibraryButton = element(by.css('mat-toolbar button:nth-child(3)'));
     activeBreadcrumb = element(by.css('div[class*="active"]'));
     uploadFileButton = element(by.css('input[data-automation-id="upload-single-file"]'));
     uploadMultipleFileButton = element(by.css('input[data-automation-id="upload-multiple-files"]'));
@@ -248,6 +251,13 @@ export class ContentServicesPage {
     clickOnCreateNewFolder() {
         Util.waitUntilElementIsVisible(this.createFolderButton);
         this.createFolderButton.click();
+        return this;
+    }
+
+    openCreateLibraryDialog() {
+        Util.waitUntilElementIsVisible(this.createLibraryButton);
+        this.createLibraryButton.click();
+        this.createLibraryDialog.waitForDialogToOpen();
         return this;
     }
 
