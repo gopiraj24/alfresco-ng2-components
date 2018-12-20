@@ -73,6 +73,7 @@ export class TasksCloudDemoPage {
     }
 
     clickOnCreateButton() {
+        Util.waitUntilElementIsVisible(this.createButton);
         Util.waitUntilElementIsClickable(this.createButton);
         this.createButton.click();
         return this;
