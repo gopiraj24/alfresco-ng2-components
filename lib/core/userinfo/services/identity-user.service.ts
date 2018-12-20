@@ -16,7 +16,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { IdentityUserModel } from '../models/identity-user.model';
@@ -64,7 +64,6 @@ export class IdentityUserService {
     getApplicationRoleClientId(appName: string): Observable<string> {
         return of('39d1f2b9-de0e-48d6-98f2-00af9d25c9e1');
     }
-
 
     findUsersByName(search: string): Observable<any> {
         if (search === '') {
