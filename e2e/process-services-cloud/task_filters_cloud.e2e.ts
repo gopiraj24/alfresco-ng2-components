@@ -22,7 +22,9 @@ import { SettingsPage } from '../pages/adf/settingsPage';
 import { NavigationBarPage } from '../pages/adf/navigationBarPage';
 import { TasksCloudDemoPage } from '../pages/adf/demo-shell/tasksCloudDemoPage';
 import { AppListCloudComponent } from '../pages/adf/process_cloud/appListCloudComponent';
+import { Util } from '../util/util';
 import { Tasks } from '../actions/APS-cloud/tasks';
+import { browser } from 'protractor';
 
 describe('Task filters cloud', () => {
 
@@ -37,8 +39,8 @@ describe('Task filters cloud', () => {
 
         const path = '/auth/realms/springboot';
         let silentLogin;
-        const newTask = 'newTask', completedTask = 'completedTask1';
-        const simpleApp = 'task-app';
+        const newTask = Util.generateRandomString(5), completedTask = Util.generateRandomString(5);
+        const simpleApp = 'simple-app';
 
         beforeAll(() => {
             silentLogin = false;
@@ -74,9 +76,10 @@ describe('Task filters cloud', () => {
             tasksCloudDemoPage.taskListCloudComponent().getDataTable().checkContentIsDisplayed(newTask);
         });
 
-        it('[C289955] Should display task in Complete Tasks List when task is completed', async() => {
+        fit('[C289955] Should display task in Complete Tasks List when task is completed', async() => {
             await tasksService.init(user, password);
             let task = await tasksService.createStandaloneTask(completedTask, simpleApp);
+            console.log(task);
 
             tasksService.claimTask(task.entry.id, simpleApp);
             tasksService.completeTask(task.entry.id, simpleApp);
@@ -89,6 +92,11 @@ describe('Task filters cloud', () => {
             expect(tasksCloudDemoPage.checkActiveFilterActive()).toBe('Completed Tasks');
 
             tasksCloudDemoPage.taskListCloudComponent().getDataTable().checkContentIsDisplayed(completedTask);
+        });
+
+        it('[C291792] Should select the first task filter from the list as default', () => {
+
+            expect(tasksCloudDemoPage.firstFilterIsActive()).toBe(true);
         });
 
     });
