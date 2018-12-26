@@ -117,6 +117,7 @@
     "COLUMNS": {
       "DISPLAY_NAME": "Nom affiché",
       "IS_LOCKED": "Verrouiller",
+      "VERSIONS": "Gérer les versions",
       "TAG": "Tag",
       "CREATED_BY": "Créé par",
       "CREATED_ON": "Créé le",
@@ -140,7 +141,6 @@
       "LISTVIEW": "Mode Liste"
     },
     "ACTIONS": {
-      "VERSIONS": "Gérer les versions",
       "METADATA": "Informations",
       "DOWNLOAD": "Télécharger",
       "PERMISSION": "Droit d'accès",

@@ -118,6 +118,7 @@
       "DISPLAY_NAME": "Vis navn",
       "IS_LOCKED": "Lås",
       "TAG": "Tagg",
+      "VERSIONS": "Administrer versjoner",
       "CREATED_BY": "Opprettet av",
       "CREATED_ON": "Opprettet",
       "CREATED": "Opprettet",
@@ -140,7 +141,6 @@
       "LISTVIEW": "Listevisningsmodus"
     },
     "ACTIONS": {
-      "VERSIONS": "Administrer versjoner",
       "METADATA": "Info",
       "DOWNLOAD": "Last ned",
       "PERMISSION": "Tillatelse",

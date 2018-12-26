@@ -117,6 +117,7 @@
     "COLUMNS": {
       "DISPLAY_NAME": "Namen anzeigen",
       "IS_LOCKED": "Sperren",
+      "VERSION": "Versionen verwalten",
       "TAG": "Tag",
       "CREATED_BY": "Erstellt von",
       "CREATED_ON": "Erstellt am",
@@ -140,7 +141,6 @@
       "LISTVIEW": "Listenansichtsmodus"
     },
     "ACTIONS": {
-      "VERSIONS": "Versionen verwalten",
       "METADATA": "Info",
       "DOWNLOAD": "Herunterladen",
       "PERMISSION": "Berechtigung",

@@ -118,6 +118,7 @@
       "DISPLAY_NAME": "Nome de exibição",
       "IS_LOCKED": "Bloqueio",
       "TAG": "Marca",
+      "VERSIONS": "Gerenciar versões",
       "CREATED_BY": "Criado por",
       "CREATED_ON": "Criado em",
       "CREATED": "Criado",
@@ -140,7 +141,6 @@
       "LISTVIEW": "Modo de exibição em lista"
     },
     "ACTIONS": {
-      "VERSIONS": "Gerenciar versões",
       "METADATA": "Informações",
       "DOWNLOAD": "Download",
       "PERMISSION": "Permissão",

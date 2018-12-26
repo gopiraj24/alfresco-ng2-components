@@ -122,6 +122,7 @@
     "COLUMNS": {
       "DISPLAY_NAME": "Display name",
       "IS_LOCKED": "Lock",
+      "VERSIONS": "Manage versions",
       "TAG": "Tag",
       "NODE_ID": "Node id",
       "CREATED_BY": "Created by",

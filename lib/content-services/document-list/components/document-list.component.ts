@@ -25,7 +25,7 @@ import {
 import {
     ContentService, DataCellEvent, DataColumn, DataRowActionEvent, DataSorting, DataTableComponent,
     DisplayMode, ObjectDataColumn, PaginatedComponent, AppConfigService, DataColumnListComponent,
-    UserPreferencesService, PaginationModel, ThumbnailService, NodeLockSubject, NodeLockType
+    UserPreferencesService, PaginationModel, ThumbnailService, NodePrivilegeSubject, NodePrivilege
 } from '@alfresco/adf-core';
 
 import { MinimalNodeEntity, MinimalNodeEntryEntity, NodePaging } from 'alfresco-js-api';
@@ -51,7 +51,7 @@ export enum PaginationStrategy {
     templateUrl: './document-list.component.html',
     encapsulation: ViewEncapsulation.None
 })
-export class DocumentListComponent implements OnInit, OnChanges, OnDestroy, AfterContentInit, PaginatedComponent, NavigableComponentInterface, NodeLockSubject {
+export class DocumentListComponent implements OnInit, OnChanges, OnDestroy, AfterContentInit, PaginatedComponent, NavigableComponentInterface, NodePrivilegeSubject {
 
     static SINGLE_CLICK_NAVIGATION: string = 'click';
     static DOUBLE_CLICK_NAVIGATION: string = 'dblclick';
@@ -239,7 +239,7 @@ export class DocumentListComponent implements OnInit, OnChanges, OnDestroy, Afte
     data: ShareDataTableAdapter;
     noPermission: boolean = false;
     selection = new Array<MinimalNodeEntity>();
-    currentRow: Subject<NodeLockType> = new Subject();
+    currentRowEvents$: Subject<NodePrivilege> = new Subject();
 
     private _pagination: BehaviorSubject<PaginationModel>;
     private layoutPresets = {};
@@ -778,8 +778,8 @@ export class DocumentListComponent implements OnInit, OnChanges, OnDestroy, Afte
             let node = (<ShareDataRow> args.row).node;
             if (node) {
                 args.actions = this.getNodeActions(node) || [];
-                this.currentRow.next({
-                    row: args,
+                this.currentRowEvents$.next({
+                    currentRow: args,
                     actions: this.getNodeActions(node) || []
                 });
             }
@@ -847,7 +847,7 @@ export class DocumentListComponent implements OnInit, OnChanges, OnDestroy, Afte
     }
 
     ngOnDestroy() {
-        this.currentRow.complete();
+        this.currentRowEvents$.complete();
         this.subscriptions.forEach((s) => s.unsubscribe());
         this.subscriptions = [];
     }

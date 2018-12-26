@@ -220,8 +220,9 @@
                 (preview)="showFile($event)"
                 (folderChange)="onFolderChange($event)"
                 (permissionError)="handlePermissionError($event)"
-                adf-document-node-lock
-                [parent]="documentList">
+                adf-node-privileges
+                [parent]="documentList"
+                [actions]="'Manage versions'">
                 <!-- template reference will be removed in the future -->
                 <no-permission-content *ngIf="enableCustomPermissionMessage">
                     <ng-template>
@@ -285,19 +286,9 @@
                         title="{{'DOCUMENT_LIST.COLUMNS.IS_LOCKED' | translate}}"
                         key="id">
                         <ng-template let-entry="$implicit">
-                            <button mat-icon-button [adf-node-lock]="entry.row.node.entry" class="adf-lock-button">
+                            <button mat-icon-button [adf-node-lock]="entry.row.node.entry" (success)="onLockActionSuccess()" class="adf-lock-button">
                                 <mat-icon *ngIf="entry.row.getValue('isLocked')">lock</mat-icon>
                                 <mat-icon *ngIf="!entry.row.getValue('isLocked')">lock_open</mat-icon>
-                            </button>
-                        </ng-template>
-                    </data-column>
-                    <data-column
-                        class="adf-desktop-only"
-                        title="manager version"
-                        key="id">
-                        <ng-template let-entry="$implicit">
-                            <button mat-icon-button [adf-document-node-lock]="entry.row.node.entry" class="adf-lock-button">
-                                <mat-icon>lock</mat-icon>
                             </button>
                         </ng-template>
                     </data-column>
@@ -400,7 +391,8 @@
                         icon="lock"
                         permission="lock"
                         handler="lock"
-                        title="DOCUMENT_LIST.ACTIONS.LOCK">
+                        title="DOCUMENT_LIST.ACTIONS.LOCK"
+                        (success)="onLockActionSuccess()">
                     </content-action>
                 </content-actions>
             </adf-document-list>

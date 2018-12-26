@@ -73,7 +73,7 @@ export class ContentNodeDialogService {
                     }
                 },
                 width: '400px'
-            });
+            }).afterClosed().subscribe(() => observable.next('Lock Action Completed'));
         } else {
             observable.error('OPERATION.FAIL.NODE.NO_PERMISSION');
         }
