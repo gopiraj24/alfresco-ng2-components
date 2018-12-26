@@ -219,7 +219,10 @@
                 (ready)="emitReadyEvent($event)"
                 (preview)="showFile($event)"
                 (folderChange)="onFolderChange($event)"
-                (permissionError)="handlePermissionError($event)">
+                (permissionError)="handlePermissionError($event)"
+                adf-document-node-lock
+                [parent]="documentList">
+                <!-- template reference will be removed in the future -->
                 <no-permission-content *ngIf="enableCustomPermissionMessage">
                     <ng-template>
                         <h1>You don't have permissions</h1>
@@ -285,6 +288,16 @@
                             <button mat-icon-button [adf-node-lock]="entry.row.node.entry" class="adf-lock-button">
                                 <mat-icon *ngIf="entry.row.getValue('isLocked')">lock</mat-icon>
                                 <mat-icon *ngIf="!entry.row.getValue('isLocked')">lock_open</mat-icon>
+                            </button>
+                        </ng-template>
+                    </data-column>
+                    <data-column
+                        class="adf-desktop-only"
+                        title="manager version"
+                        key="id">
+                        <ng-template let-entry="$implicit">
+                            <button mat-icon-button [adf-document-node-lock]="entry.row.node.entry" class="adf-lock-button">
+                                <mat-icon>lock</mat-icon>
                             </button>
                         </ng-template>
                     </data-column>

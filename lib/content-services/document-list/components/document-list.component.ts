@@ -25,7 +25,7 @@ import {
 import {
     ContentService, DataCellEvent, DataColumn, DataRowActionEvent, DataSorting, DataTableComponent,
     DisplayMode, ObjectDataColumn, PaginatedComponent, AppConfigService, DataColumnListComponent,
-    UserPreferencesService, PaginationModel, ThumbnailService
+    UserPreferencesService, PaginationModel, ThumbnailService, NodeLockSubject, NodeLockType
 } from '@alfresco/adf-core';
 
 import { MinimalNodeEntity, MinimalNodeEntryEntity, NodePaging } from 'alfresco-js-api';
@@ -51,7 +51,7 @@ export enum PaginationStrategy {
     templateUrl: './document-list.component.html',
     encapsulation: ViewEncapsulation.None
 })
-export class DocumentListComponent implements OnInit, OnChanges, OnDestroy, AfterContentInit, PaginatedComponent, NavigableComponentInterface {
+export class DocumentListComponent implements OnInit, OnChanges, OnDestroy, AfterContentInit, PaginatedComponent, NavigableComponentInterface, NodeLockSubject {
 
     static SINGLE_CLICK_NAVIGATION: string = 'click';
     static DOUBLE_CLICK_NAVIGATION: string = 'dblclick';
@@ -239,6 +239,7 @@ export class DocumentListComponent implements OnInit, OnChanges, OnDestroy, Afte
     data: ShareDataTableAdapter;
     noPermission: boolean = false;
     selection = new Array<MinimalNodeEntity>();
+    currentRow: Subject<NodeLockType> = new Subject();
 
     private _pagination: BehaviorSubject<PaginationModel>;
     private layoutPresets = {};
@@ -777,6 +778,10 @@ export class DocumentListComponent implements OnInit, OnChanges, OnDestroy, Afte
             let node = (<ShareDataRow> args.row).node;
             if (node) {
                 args.actions = this.getNodeActions(node) || [];
+                this.currentRow.next({
+                    row: args,
+                    actions: this.getNodeActions(node) || []
+                });
             }
         }
     }
@@ -842,6 +847,7 @@ export class DocumentListComponent implements OnInit, OnChanges, OnDestroy, Afte
     }
 
     ngOnDestroy() {
+        this.currentRow.complete();
         this.subscriptions.forEach((s) => s.unsubscribe());
         this.subscriptions = [];
     }
