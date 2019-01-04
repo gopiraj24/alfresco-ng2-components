@@ -17,21 +17,15 @@
 
 import { NgModule } from '@angular/core';
 import { TRANSLATION_PROVIDER } from '@alfresco/adf-core';
-import { AppListCloudModule } from './app-list-cloud/app-list-cloud.module';
-import { TaskListCloudModule } from './task-list-cloud/task-list-cloud.module';
-import { TaskCloudModule } from './task-cloud/task-cloud.module';
-import { ProcessListCloudModule } from './process-list-cloud/process-list-cloud.module';
-import { ProcessCloudModule } from './process-cloud/process-cloud.module';
-import { StartTaskCloudModule } from './start-task-cloud/start-task-cloud.module';
+import { AppListCloudModule } from './app/app-list-cloud.module';
+import { TaskCloudModule } from './task/task-cloud.module';
+import { ProcessCloudModule } from './process/process-cloud.module';
 
 @NgModule({
     imports: [
         AppListCloudModule,
-        TaskListCloudModule,
-        TaskCloudModule,
-        ProcessListCloudModule,
         ProcessCloudModule,
-        StartTaskCloudModule
+        TaskCloudModule
     ],
     providers: [
         {
@@ -45,11 +39,8 @@ import { StartTaskCloudModule } from './start-task-cloud/start-task-cloud.module
     ],
     exports: [
         AppListCloudModule,
-        TaskListCloudModule,
-        TaskCloudModule,
-        ProcessListCloudModule,
         ProcessCloudModule,
-        StartTaskCloudModule
+        TaskCloudModule
     ]
 })
 export class ProcessServicesCloudModule { }
