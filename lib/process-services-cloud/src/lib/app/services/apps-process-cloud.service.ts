@@ -16,7 +16,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable, from, throwError } from 'rxjs';
+import { Observable, from, throwError, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { AlfrescoApiService } from '@alfresco/adf-core';
 import { AppConfigService, LogService } from '@alfresco/adf-core';
@@ -25,48 +25,21 @@ import { ApplicationInstanceModel } from '../models/application-instance.model';
 @Injectable()
 export class AppsProcessCloudService {
 
-    static STATUS_RUNNING = 'RUNNING';
-
-    contextRoot = '';
-
     constructor(
         private apiService: AlfrescoApiService,
         private logService: LogService,
-        private appConfig: AppConfigService) {
-        this.contextRoot = this.appConfig.get('bpmHost', '');
-    }
+        private appConfigService: AppConfigService) {}
 
     /**
      * Gets a list of deployed apps for this user by status.
      * @returns The list of deployed apps
      */
     getDeployedApplicationsByStatus(status: string): Observable<ApplicationInstanceModel[]> {
-        const api: any = this.apiService.getInstance().oauth2Auth;
-        api.basePath = this.contextRoot;
-        const path = 'alfresco-deployment-service/v1/applications';
-        const httpMethod = 'GET', pathParams = {}, queryParams = {},
-            headerParams = {}, formParams = {}, bodyParam = {}, authNames = [],
-            contentTypes = ['application/json'], accepts = ['application/json'];
-        return from(api.callApi(
-            path, httpMethod,
-            pathParams, queryParams, headerParams, formParams, bodyParam,
-            authNames, contentTypes, accepts, [], ''
-        ))
-            .pipe(
-                map((apps: Array<{}>) => {
-                    return apps.filter((app: ApplicationInstanceModel) => app.status === status)
-                        .map((app) => {
-                            return new ApplicationInstanceModel(app);
-                        });
-                }
-                ),
-                catchError((err) => this.handleError(err))
-            );
-    }
-
-    getRunningApplications(): Observable<any> {
+        if (status === '') {
+            return of([]);
+        }
         const url = this.getApplicationUrl();
-        const httpMethod = 'GET', pathParams = {}, queryParams = {status: AppsProcessCloudService.STATUS_RUNNING}, bodyParam = {}, headerParams = {},
+        const httpMethod = 'GET', pathParams = {}, queryParams = {status: status}, bodyParam = {}, headerParams = {},
             formParams = {}, authNames = [], contentTypes = ['application/json'], accepts = ['application/json'];
 
         return (from(this.apiService.getInstance().oauth2Auth.callCustomApi(
@@ -74,12 +47,17 @@ export class AppsProcessCloudService {
             headerParams, formParams, bodyParam, authNames,
             contentTypes, accepts, Object, null, null)
         )).pipe(
+            map((applications: ApplicationInstanceModel[]) => {
+                    return applications.map((application) => {
+                        return new ApplicationInstanceModel(application);
+                    });
+            }),
             catchError((err) => this.handleError(err))
         );
     }
 
     private getApplicationUrl() {
-        return `${this.appConfig.get('bpmHost')}/alfresco-deployment-service/v1/applications`;
+        return `${this.appConfigService.get('bpmHost')}/alfresco-deployment-service/v1/applications`;
     }
 
     private handleError(error?: any) {
